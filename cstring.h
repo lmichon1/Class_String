@@ -18,7 +18,8 @@ class cstring
   int getCapacity();
   int getChar(int place);
 
-
+//Destructor
+~cstring(void);
 
  private:
   int nb_char, capacity;
