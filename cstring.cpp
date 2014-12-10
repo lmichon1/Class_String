@@ -54,6 +54,31 @@ cstring & cstring::operator=(char c)
   return *this;
 }
 
+cstring cstring::operator+(char* databis)
+{
+  printf("j'entre dans ma méthode\n");
+  int nb_char2=nb_char+strlen(databis);
+  int capacity2=capacity+strlen(databis);
+  printf("j'ai créé les entiers longueur et capacité\n");
+  char* char_tamp=new char[nb_char2];
+  int i,j;
+  printf("j'ai créé mon char* charbis\n");
+  for(i=0;i<nb_char;i++)
+  {
+     char_tamp[i] =data[i];
+  }
+  printf("j'ai copié les char de la string\n");
+  for(j=0;j<strlen(databis);j++)
+  {
+     char_tamp[j+nb_char]=databis[j];
+  }
+  printf("j'ai ajouté les char de char*\n");
+  cstring *cstr=new cstring(char_tamp);
+  printf("j'ai créé la string que je vais retourner\n");
+  return *cstr;
+
+}
+
 
 //getters
 int cstring::getLength()
@@ -72,9 +97,6 @@ int cstring::getSizeMax()
 }
 //destructor
 cstring::~cstring(){
-	delete &nb_char;
-	delete &capacity;
-	delete data;
 }
 //public methode/ show everything from string
 void cstring::showstring (void)
