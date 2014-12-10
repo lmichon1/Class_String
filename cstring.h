@@ -23,6 +23,7 @@ class cstring
   //modification de la taille
   void resize(int lg); //modifie la taille 
   void resize(int lg, char c);
+  bool empty(void);
 
   //Destructor
   ~cstring(void);
