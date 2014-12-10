@@ -14,6 +14,7 @@ class cstring
   
   //operator
   cstring & operator= ( const cstring &str );
+  cstring & operator=(char c);
 
   //getters
   int getLength();
@@ -32,8 +33,7 @@ class cstring
   //Destructor
   ~cstring(void);
 
-  //operator
-  cstring & operator=(char c);
+
 
  private:
   int nb_char, capacity;
