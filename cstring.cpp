@@ -43,7 +43,12 @@ int cstring::getSizeMax()
 {
   return MAX_SIZE;
 }
-
+//destructor
+cstring::~cstring(){
+	delete &nb_char;
+	delete &capacity;
+	delete data;
+}
 
 //methods resize
 //modification de nb_char en lg
