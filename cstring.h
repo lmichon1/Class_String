@@ -15,6 +15,7 @@ class cstring
   //operator
   cstring & operator= ( const cstring &str );
   cstring & operator=(char c);
+  cstring operator+(char* databis);
 
   //getters
   int getLength();
