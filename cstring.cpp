@@ -50,6 +50,23 @@ cstring::~cstring(){
 	delete data;
 }
 
+//changes the size of the string by i
+void cstring::reserve(int i){
+if(i<0){
+  if(capacity+i<=nb_char){
+	capacity=nb_char;/*establishes a limit:reserve won't delete characters*/ 
+	}
+  else capacity=capacity+i;
+  delete &(*(data+capacity));
+}
+  else{
+	int r;
+	char* s=new char [i];
+	for(r=capacity;r<capacity+i;r++){
+		*(data+capacity+r)=*(s+r);
+	}
+	capacity=capacity+i;
+}}
 //methods resize
 //modification de nb_char en lg
 void cstring::resize(int lg)
