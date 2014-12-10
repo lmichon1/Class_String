@@ -11,13 +11,17 @@ class cstring
   void setLength(int length);
   void setData(char* databis);
   void setChar(int place, char letter);
+  
+  //operator
+  cstring & operator= ( const cstring &str );
 
   //getters
   int getLength();
   int getSizeMax();
   int getCapacity();
   int getChar(int place);
-
+ //methode
+  void showstring (void);
   void reserve(int i);
   char& at(int pos);
   //modification de la taille
