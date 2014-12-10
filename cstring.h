@@ -4,7 +4,7 @@ class cstring
  public:
   //constructors
   cstring(void);
-  cstring(char* str);
+  cstring(const char* databis);
   cstring(const cstring &strbis);
 
   //setters
