@@ -112,3 +112,7 @@ char & cstring::at(int pos)
     }*/
   return *(data+pos);
 }
+//verify if a string is empty
+bool cstring::empty(void){
+return nb_char==0;
+}
