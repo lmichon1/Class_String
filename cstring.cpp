@@ -93,7 +93,8 @@ void cstring::showstring (void)
 
 
 //changes the size of the string by i
-/*void cstring::reserve(int i){
+/*
+void cstring::reserve(int i){
 if(i<0){
   if(capacity+i<=nb_char){
 	capacity=nb_char;//establishes a limit:reserve won't delete characters
@@ -108,10 +109,12 @@ if(i<0){
 		*(data+capacity+r)=*(s+r);
 	}
 	capacity=capacity+i;
-}}*/
+}}
+*/
+
 //methods resize
 //modification de nb_char en lg
-/*
+
 void cstring::resize(int lg)
 {
   int i;
@@ -161,5 +164,5 @@ char & cstring::at(int pos)
 //verify if a string is empty
 bool cstring::empty(void){
 return nb_char==0;
-}*/
+}
 

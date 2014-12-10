@@ -23,7 +23,7 @@ class cstring
   int getChar(int place);
  //methode
   void showstring (void);
-  void reserve(int i);
+  
   char& at(int pos);
   //modification de la taille
   void resize(int lg); //modifie la taille 
