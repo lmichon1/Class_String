@@ -13,6 +13,7 @@ cstring::cstring(void)
   data=NULL;
 }
 
+//constructor from c-string
 cstring::cstring(char* databis)
 {
   nb_char=strlen(databis);
@@ -38,3 +39,54 @@ int cstring::getCapacity()
   return capacity;
 }
 
+int cstring::getSizeMax()
+{
+  return MAX_SIZE;
+}
+
+
+//methods resize
+//modification de nb_char en lg
+void cstring::resize(int lg)
+{
+  int i;
+  char * copy; //le tableau non permanent dans lequel on recopie les valeurs de datas
+  if(lg>capacity){
+    capacity=lg; //augmentation de la capacity si lg plus grand que capacity
+    copy=new char[lg];
+    for(i=0;i<nb_char;i++){
+      copy[i]=data[i]; //recopie les char dans un tableau 
+    }
+    data=copy;
+  }
+  else{
+    copy=new char[lg];
+    for(i=0;i<lg;i++){
+      copy[i]=data[i];
+    }
+    data=copy;
+  }
+  delete[] copy;
+ nb_char=lg;
+}
+
+//modifie la taille nb_char en lg, et éventuellemnt comble le vide par des char 'c'
+void cstring::resize(int lg, char c){
+  int i;
+  int sizetamp=nb_char;
+  resize(lg); //modifie la taille
+  if(lg>sizetamp){
+    for(i=sizetamp; i<lg;i++){
+      data[i]=c; //mets les caractères c dans l'espace vide créer par le changement de taille
+    }
+  }
+}
+
+//return the char's adress at the position pos
+char & cstring::at(int pos)
+{
+  /* if(pos>nb_char){
+    return NULL;
+    }*/
+  return *(data+pos);
+}
