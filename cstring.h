@@ -18,10 +18,14 @@ class cstring
   int getCapacity();
   int getChar(int place);
 
+
   char& at(int pos);
   //modification de la taille
   void resize(int lg); //modifie la taille 
   void resize(int lg, char c);
+
+  //Destructor
+  ~cstring(void);
 
  private:
   int nb_char, capacity;
