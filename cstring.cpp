@@ -14,18 +14,29 @@ cstring::cstring(void)
 }
 
 //constructor from c-string
-cstring::cstring(char* databis)
+cstring::cstring(const char* databis)
 {
   nb_char=strlen(databis);
   capacity=nb_char;
   data=new char[nb_char];
-  int i;
-  for(i=0;i<nb_char;i++){
-    data[i]=databis[i];
-  }
+  memcpy (data, databis, nb_char+1);
 
 }
-
+cstring::cstring(const cstring &strbis)// constructor with param
+{
+  nb_char=strbis.nb_char;
+  capacity=strbis.capacity;
+  data=new char[capacity+1];
+  memcpy (data,strbis.data, nb_char+ 1);
+  
+//operators
+cstring & cstring::operator= ( const cstring &str )
+{
+  char* temp_data=new char [str.nb_char+1];
+  strcpy(temp_data,str.data);
+  data=temp_data;
+  return *this;
+}
 
 
 //getters
@@ -49,6 +60,21 @@ cstring::~cstring(){
 	delete &capacity;
 	delete data;
 }
+//public methode/ show everything from string
+void cstring::showstring (void)
+{
+  printf("%p\n");
+  printf("%d\n",nb_char);
+  printf("%d\n",capacity);
+  int i;
+  for(i=0;i<nb_char;i++)
+  {
+    printf("%c",data[i]);
+  }
+  printf("\n");
+
+}
+
 
 //changes the size of the string by i
 void cstring::reserve(int i){
