@@ -27,6 +27,9 @@ class cstring
   //Destructor
   ~cstring(void);
 
+  //operator
+  cstring & operator=(char c);
+
  private:
   int nb_char, capacity;
   char* data;
