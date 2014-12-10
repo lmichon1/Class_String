@@ -95,3 +95,15 @@ char & cstring::at(int pos)
     }*/
   return *(data+pos);
 }
+
+
+//operator
+cstring & cstring::operator=(char c)
+{
+  char* str=new char[1];
+  str[0]=c;
+  cstring  * cstr = new cstring(str);
+return *(cstr);
+}
+
+
