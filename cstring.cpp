@@ -9,7 +9,6 @@ cstring::cstring(void)
 {
   nb_char=0;
   capacity=0;
-  
   data=NULL;
 }
 
@@ -32,12 +31,26 @@ cstring::cstring(const cstring &strbis)// constructor with param
   memcpy (data,strbis.data, nb_char+ 1);
 }  
 
+
 //operators
 cstring & cstring::operator= ( const cstring &str )
 {
   char* temp_data=new char [str.nb_char+1];
   strcpy(temp_data,str.data);
   data=temp_data;
+  return *this;
+}
+
+
+cstring & cstring::operator=(char c)
+{
+  char* str=new char[1];
+  str[0]=c;
+  //cstring  * cstr = new cstring(str);
+  //printf("je suis dans operator = et la long vaut %d\n", cstr->getLength());
+  data=str;
+  capacity=1;
+  nb_char=1;
   return *this;
 }
 
@@ -80,10 +93,10 @@ void cstring::showstring (void)
 
 
 //changes the size of the string by i
-void cstring::reserve(int i){
+/*void cstring::reserve(int i){
 if(i<0){
   if(capacity+i<=nb_char){
-	capacity=nb_char;/*establishes a limit:reserve won't delete characters*/ 
+	capacity=nb_char;//establishes a limit:reserve won't delete characters
 	}
   else capacity=capacity+i;
   delete &(*(data+capacity));
@@ -95,9 +108,10 @@ if(i<0){
 		*(data+capacity+r)=*(s+r);
 	}
 	capacity=capacity+i;
-}}
+}}*/
 //methods resize
 //modification de nb_char en lg
+/*
 void cstring::resize(int lg)
 {
   int i;
@@ -136,26 +150,16 @@ void cstring::resize(int lg, char c){
 //return the char's adress at the position pos
 char & cstring::at(int pos)
 {
-  /* if(pos>nb_char){
-    return NULL;
-    }*/
   return *(data+pos);
 }
 
 
 
-//operator
-cstring & cstring::operator=(char c)
-{
-  char* str=new char[1];
-  str[0]=c;
-  cstring  * cstr = new cstring(str);
-return *(cstr);
-}
+
 
 
 //verify if a string is empty
 bool cstring::empty(void){
 return nb_char==0;
-}
+}*/
 
