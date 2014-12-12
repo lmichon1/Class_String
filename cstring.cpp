@@ -99,6 +99,19 @@ int cstring::getSizeMax()
 cstring::~cstring(){
 }
 //public methode/ show everything from string
+
+const char* cstring::c_str(void) const
+{
+  char * temp_data=new char[nb_char+1];
+  int i;
+  for(i=0;i<nb_char;i++)
+  {
+    temp_data[i]=data[i];
+  }
+  temp_data[nb_char]='\0';
+  return temp_data;
+}
+
 void cstring::showstring (void)
 {
   printf("%p\n");
