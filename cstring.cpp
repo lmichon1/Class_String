@@ -54,9 +54,19 @@ cstring & cstring::operator=(char c)
   return *this;
 }
 
-cstring cstring::operator+(char* databis)
+cstring cstring::operator+(char ch)
 {
-  printf("j'entre dans ma méthode\n");
+  int temp_nb_char=nb_char+2;
+  char* temp_data=new char[temp_nb_char];//reserve memory of tempolary string
+  memcpy(temp_data,data,nb_char*sizeof(*data));
+  temp_data[temp_nb_char-2]=ch;
+  temp_data[temp_nb_char-1]='\0';
+
+  cstring* final_data=new cstring(temp_data);
+  return *final_data;
+}
+
+  /*printf("j'entre dans ma méthode\n");
   int nb_char2=nb_char+strlen(databis);
   int capacity2=capacity+strlen(databis);
   printf("j'ai créé les entiers longueur et capacité\n");
@@ -76,8 +86,8 @@ cstring cstring::operator+(char* databis)
   cstring *cstr=new cstring(char_tamp);
   printf("j'ai créé la string que je vais retourner\n");
   return *cstr;
+*/
 
-}
 
 
 //getters
@@ -124,6 +134,13 @@ void cstring::showstring (void)
   }
   printf("\n");
 
+}
+//clear string
+void cstring::clear(void)
+{
+  nb_char=0;
+  data=new char[capacity+1];
+  data[0]='\0';
 }
 
 
