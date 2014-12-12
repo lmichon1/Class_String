@@ -1,46 +1,151 @@
+
+
+
+//****************************************************************************
+//
+//                         CSTRING
+//
+//****************************************************************************
+
+
+
+#ifndef __CSTRING_H__
+#define __CSTRING_H__
+
+
+// ===========================================================================
+//                                  Libraries
+// ===========================================================================
+#include <cstdio>
+#include <cstdlib>
+
+
+
+
+// ===========================================================================
+//                                Project Files
+// ===========================================================================
+
+
+
+
+// ===========================================================================
+//                              Class declarations
+// ===========================================================================
+
+
+
+
+
+
 class cstring
 {
+  public:
+    
+    // =======================================================================
+    //                                 Enums
+    // =======================================================================
+    
+    // =======================================================================
+    //                               Constructors
+    // =======================================================================
+    cstring(void);
+    cstring(const char* databis);
+    cstring(const cstring &strbis);
+    // =======================================================================
+    //                                Destructor
+    // =======================================================================
+    virtual ~cstring(void);
 
- public:
-  //constructors
-  cstring(void);
-  cstring(const char* databis);
-  cstring(const cstring &strbis);
+    // =======================================================================
+    //                            Accessors: getters
+    // =======================================================================
+    int getLength();
+    int getSizeMax();
+    int getCapacity();
+    int getChar(int place);
+    // =======================================================================
+    //                            Accessors: setters
+    // =======================================================================
+    void setLength(int length);
+    void setData(char* databis);
+    void setChar(int place, char letter);
+    // =======================================================================
+    //                                Operators
+    // =======================================================================
+    cstring & operator= ( const cstring &str );
+    cstring & operator=(char c);
+    cstring operator+(char ch);
+    // =======================================================================
+    //                              Public Methods
+    // =======================================================================
+      const char* c_str(void) const;
+    void showstring (void);
+    void clear(void);
+    char& at(int pos);
+    //modification de la taille
+    void resize(int lg); //modifie la taille 
+    void resize(int lg, char c);
+    bool empty(void);
 
-  //setters
-  void setLength(int length);
-  void setData(char* databis);
-  void setChar(int place, char letter);
-  
-  //operator
-  cstring & operator= ( const cstring &str );
-  cstring & operator=(char c);
-  cstring operator+(char ch);
-
-  //getters
-  int getLength();
-  int getSizeMax();
-  int getCapacity();
-  int getChar(int place);
- //methode
-  const char* c_str(void) const;
-  void showstring (void);
-  void clear(void);
-  char& at(int pos);
-  //modification de la taille
-  void resize(int lg); //modifie la taille 
-  void resize(int lg, char c);
-  bool empty(void);
-
-  //Destructor
-  ~cstring(void);
+    // =======================================================================
+    //                             Public Attributes
+    // =======================================================================
 
 
 
- private:
-  int nb_char, capacity;
-  char* data;
-  static const int MAX_SIZE;
 
+
+  protected :
+
+    // =======================================================================
+    //                            Forbidden Constructors
+    // =======================================================================
+    /*cstring(void)
+    {
+      printf("%s:%d: error: call to forbidden constructor.\n", __FILE__, __LINE__);
+      exit(EXIT_FAILURE);
+    };
+    
+    cstring(const cstring &model)
+    {
+      printf("%s:%d: error: call to forbidden constructor.\n", __FILE__, __LINE__);
+      exit(EXIT_FAILURE);
+    };
+    */
+
+
+
+    // =======================================================================
+    //                              Protected Methods
+    // =======================================================================
+
+    // =======================================================================
+    //                             Protected Attributes
+    // =======================================================================
+    private:
+    int nb_char, capacity;
+    char* data;
+    static const int MAX_SIZE;
+
+
+
+// ===========================================================================
+//                              Getters' definitions
+// ===========================================================================
+
+// ===========================================================================
+//                              Setters' definitions
+// ===========================================================================
+
+// ===========================================================================
+//                             Operators' definitions
+// ===========================================================================
+
+// ===========================================================================
+//                          Inline functions' definition
+// ===========================================================================
 };
+
+#endif // __CSTRING_H__
 
