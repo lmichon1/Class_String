@@ -23,6 +23,7 @@ class cstring
   int getCapacity();
   int getChar(int place);
  //methode
+  const char* c_str(void) const;
   void showstring (void);
   
   char& at(int pos);
