@@ -15,7 +15,7 @@ class cstring
   //operator
   cstring & operator= ( const cstring &str );
   cstring & operator=(char c);
-  cstring operator+(char* databis);
+  cstring operator+(char ch);
 
   //getters
   int getLength();
@@ -25,7 +25,7 @@ class cstring
  //methode
   const char* c_str(void) const;
   void showstring (void);
-  
+  void clear(void);
   char& at(int pos);
   //modification de la taille
   void resize(int lg); //modifie la taille 
