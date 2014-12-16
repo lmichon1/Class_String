@@ -81,8 +81,7 @@ cstring & cstring::operator=(char c)
 {
   char* str=new char[1];
   str[0]=c;
-  //cstring  * cstr = new cstring(str);
-  //printf("je suis dans operator = et la long vaut %d\n", cstr->getLength());
+  
   data=str;
   capacity=1;
   nb_char=1;
@@ -107,7 +106,7 @@ cstring cstring::operator+(char ch)
 //                            Public Methods
 // =================================================================
 //gettor////////////////////////
-int cstring::getLength()
+int cstring::length()
 {
   return nb_char;
 }
@@ -178,17 +177,17 @@ if(i<0){
 */
 
 //methods resize
-//modification de nb_char en lg
-//Methode resize///////////////////////////////////////////////////////
+//change nb_char in lg
+//Method resize///////////////////////////////////////////////////////
 void cstring::resize(int lg)
 {
   int i;
-  char * copy; //le tableau non permanent dans lequel on recopie les valeurs de datas
+  char * copy; //the non permanent table in which we copy value's data
   if(lg>capacity){
-    capacity=lg; //augmentation de la capacity si lg plus grand que capacity
+    capacity=lg; //increase capacity if lg longer than capacity
     copy=new char[lg];
     for(i=0;i<nb_char;i++){
-      copy[i]=data[i]; //recopie les char dans un tableau 
+      copy[i]=data[i]; //copy char into a table 
     }
     data=copy;
   }
@@ -203,14 +202,15 @@ void cstring::resize(int lg)
  nb_char=lg;
 }
 
-//modifie la taille nb_char en lg, et éventuellemnt comble le vide par des char 'c'
+//method resize(int, char)
+//modify size nb_char in lg, and eventually replace empty by  chars 'c'
 void cstring::resize(int lg, char c){
   int i;
   int sizetamp=nb_char;
-  resize(lg); //modifie la taille
+  resize(lg); //change size
   if(lg>sizetamp){
     for(i=sizetamp; i<lg;i++){
-      data[i]=c; //mets les caractères c dans l'espace vide créer par le changement de taille
+      data[i]=c; //put chars c into empty spaces create by changing the size
     }
   }
 }
