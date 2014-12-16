@@ -1,10 +1,33 @@
-#include "cstring.h"
-#include<cstdlib>
-#include<cstdio>
-#include<cstring>
-const int cstring::MAX_SIZE=255;
 
-//constructors
+
+// =================================================================
+//                              Libraries
+// =================================================================
+
+#include <cstdlib>
+#include <cstdio>
+#include <cstring>
+
+
+
+// =================================================================
+//                            Project Files
+// =================================================================
+#include "cstring.h"
+// #########################################################################
+//                                                                         #
+//                               Class STRING                              #
+//                                                                         #
+// #########################################################################
+
+// =================================================================
+//                    Definition of static attributes
+// =================================================================
+const int cstring::MAX_SIZE=255;
+// =================================================================
+//                             Constructors
+// =================================================================
+
 cstring::cstring(void)
 {
   nb_char=0;
@@ -12,7 +35,7 @@ cstring::cstring(void)
   data=NULL;
 }
 
-//constructor from c-string
+//constructor from c-string/////////////////////////////////////////
 cstring::cstring(const char* databis)
 {
   nb_char=strlen(databis);
@@ -22,8 +45,8 @@ cstring::cstring(const char* databis)
 
 }
 
-
-cstring::cstring(const cstring &strbis)// constructor with param
+//constructor with param////////////////////////////////////////////
+cstring::cstring(const cstring &strbis)
 {
   nb_char=strbis.nb_char;
   capacity=strbis.capacity;
@@ -31,17 +54,29 @@ cstring::cstring(const cstring &strbis)// constructor with param
   memcpy (data,strbis.data, nb_char+ 1);
 }  
 
+// =================================================================
+//                             Destructor
+// =================================================================
+cstring::~cstring(void)
+{
+  delete[] data;
+  nb_char=0;
+  capacity=0;
+}
 
-//operators
+// =================================================================
+//                             Operator
+// =================================================================
+//=string//////////////////////////////
 cstring & cstring::operator= ( const cstring &str )
 {
   char* temp_data=new char [str.nb_char+1];
+  //memcpy(temp_data,str.data,str.nb_char+1);
   strcpy(temp_data,str.data);
   data=temp_data;
   return *this;
 }
-
-
+//=char////////////////////////////////
 cstring & cstring::operator=(char c)
 {
   char* str=new char[1];
@@ -53,34 +88,25 @@ cstring & cstring::operator=(char c)
   nb_char=1;
   return *this;
 }
-
-cstring cstring::operator+(char* databis)
+//+char///////////////////////////////
+cstring cstring::operator+(char ch)
 {
-  printf("j'entre dans ma méthode\n");
-  int nb_char2=nb_char+strlen(databis);
-  int capacity2=capacity+strlen(databis);
-  printf("j'ai créé les entiers longueur et capacité\n");
-  char* char_tamp=new char[nb_char2];
-  int i,j;
-  printf("j'ai créé mon char* charbis\n");
-  for(i=0;i<nb_char;i++)
-  {
-     char_tamp[i] =data[i];
-  }
-  printf("j'ai copié les char de la string\n");
-  for(j=0;j<strlen(databis);j++)
-  {
-     char_tamp[j+nb_char]=databis[j];
-  }
-  printf("j'ai ajouté les char de char*\n");
-  cstring *cstr=new cstring(char_tamp);
-  printf("j'ai créé la string que je vais retourner\n");
-  return *cstr;
+  int temp_nb_char=nb_char+2;
+  char* temp_data=new char[temp_nb_char];//reserve memory of tempolary string
+  memcpy(temp_data,data,nb_char*sizeof(*data));
+  temp_data[temp_nb_char-2]=ch;
+  temp_data[temp_nb_char-1]='\0';
 
+  cstring* final_data=new cstring(temp_data);
+  return *final_data;
 }
 
 
-//getters
+
+// =================================================================
+//                            Public Methods
+// =================================================================
+//gettor////////////////////////
 int cstring::getLength()
 {
   return nb_char;
@@ -95,10 +121,20 @@ int cstring::getSizeMax()
 {
   return MAX_SIZE;
 }
-//destructor
-cstring::~cstring(){
+
+//Method C_str///////////////////////////////////////////////////////:
+const char* cstring::c_str(void) const
+{
+  char * temp_data=new char[nb_char+1];
+  int i;
+  for(i=0;i<nb_char;i++)
+  {
+    temp_data[i]=data[i];
+  }
+  temp_data[nb_char]='\0';
+  return temp_data;
 }
-//public methode/ show everything from string
+//Method showstring-all the contenants of string will be shown////////
 void cstring::showstring (void)
 {
   printf("%p\n");
@@ -111,6 +147,13 @@ void cstring::showstring (void)
   }
   printf("\n");
 
+}
+//Method clear string /////////////////////////////////////////////////
+void cstring::clear(void)
+{
+  nb_char=0;
+  data=new char[capacity+1];
+  data[0]='\0';
 }
 
 
@@ -136,7 +179,7 @@ if(i<0){
 
 //methods resize
 //modification de nb_char en lg
-
+//Methode resize///////////////////////////////////////////////////////
 void cstring::resize(int lg)
 {
   int i;
@@ -177,11 +220,6 @@ char & cstring::at(int pos)
 {
   return *(data+pos);
 }
-
-
-
-
-
 
 //verify if a string is empty
 bool cstring::empty(void){
