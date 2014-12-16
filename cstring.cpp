@@ -87,6 +87,12 @@ cstring & cstring::operator=(char c)
   nb_char=1;
   return *this;
 }
+//=*char///////////////////////////////
+cstring & cstring::operator=(char* c){
+  capacity=nb_char=strlen(c);
+  data=c;
+  return *this;
+   }
 //+char///////////////////////////////
 cstring cstring::operator+(char ch)
 {
@@ -99,7 +105,27 @@ cstring cstring::operator+(char ch)
   cstring* final_data=new cstring(temp_data);
   return *final_data;
 }
-
+//+string/////////////////////////////
+cstring& cstring::operator+(cstring &str){
+cstring *tot;
+tot->capacity=capacity+str.capacity;
+tot->data=new char[tot->capacity];
+int i;
+for(i=0;i<nb_char;i++){
+    tot->data[i]=data[i];
+}
+for(i=0;i<str.nb_char;i++){
+tot->data[i+nb_char]=str.data[i];
+}
+tot->nb_char=nb_char+str.nb_char;
+return *tot;
+}
+//return character in given position
+char& cstring::operator[](unsigned int pos){
+if(pos<capacity){
+return *(data+pos);}
+return 0;
+}
 
 
 // =================================================================
@@ -120,6 +146,14 @@ int cstring::getSizeMax()
 {
   return MAX_SIZE;
 }
+
+char* cstring::getData(int place){
+return &(*(data+place));
+}
+
+char cstring::getChar(){
+return *(data);
+};
 
 //Method C_str///////////////////////////////////////////////////////:
 const char* cstring::c_str(void) const
@@ -157,7 +191,6 @@ void cstring::clear(void)
 
 
 //changes the size of the string by i
-/*
 void cstring::reserve(int i){
 if(i<0){
   if(capacity+i<=nb_char){
@@ -168,13 +201,15 @@ if(i<0){
 }
   else{
 	int r;
-	char* s=new char [i];
-	for(r=capacity;r<capacity+i;r++){
-		*(data+capacity+r)=*(s+r);
-	}
 	capacity=capacity+i;
+	char* s=new char [capacity];
+	for(r=0;r<nb_char;r++){
+		s[r]=data[r];
+	}
+	for(r=nb_char;r<capacity;r++){
+		s[r]='\0';}
+	data=s;
 }}
-*/
 
 //methods resize
 //change nb_char in lg
