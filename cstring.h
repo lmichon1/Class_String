@@ -60,8 +60,8 @@ class cstring
     // =======================================================================
     //                            Accessors: getters
     // =======================================================================
-    int getLength();
-    int getSizeMax();
+    int length();
+    int getSizeMax(); //here's the max_size method
     int getCapacity();
     int getChar(int place);
     // =======================================================================
