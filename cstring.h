@@ -63,7 +63,8 @@ class cstring
     int length();
     int getSizeMax(); //here's the max_size method
     int getCapacity();
-    int getChar(int place);
+    char getChar(int place);
+    char* getData();
     // =======================================================================
     //                            Accessors: setters
     // =======================================================================
@@ -75,12 +76,16 @@ class cstring
     // =======================================================================
     cstring & operator= ( const cstring &str );
     cstring & operator=(char c);
+    cstring & operator=(char* c);
     cstring operator+(char ch);
+    cstring& operator+(const cstring & str);
+    char& operator[](unsigned int pos);
     // =======================================================================
     //                              Public Methods
     // =======================================================================
-      const char* c_str(void) const;
+    const char* c_str(void) const;
     void showstring (void);
+    void reserve(int i);
     void clear(void);
     char& at(int pos);
     //modification de la taille
