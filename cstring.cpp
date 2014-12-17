@@ -106,7 +106,7 @@ cstring cstring::operator+(char ch)
   return *final_data;
 }
 //+string/////////////////////////////
-cstring& cstring::operator+(cstring &str){
+cstring& cstring::operator+(const cstring &str){
 cstring *tot;
 tot->capacity=capacity+str.capacity;
 tot->data=new char[tot->capacity];
