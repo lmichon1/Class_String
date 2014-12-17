@@ -124,7 +124,8 @@ return *tot;
 char& cstring::operator[](unsigned int pos){
 if(pos<capacity){
 return *(data+pos);}
-return 0;
+printf("Position [%d] inexistant\n",pos);
+return *(data+pos);
 }
 
 
