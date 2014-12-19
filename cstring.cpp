@@ -193,16 +193,11 @@ void cstring::clear(void)
 
 //changes the size of the string by i
 void cstring::reserve(int i){
-if(i<0){
   if(capacity+i<=nb_char){
 	capacity=nb_char;//establishes a limit:reserve won't delete characters
-	}
-  else capacity=capacity+i;
-  delete &(*(data+capacity));
 }
-  else{
+  else capacity=capacity+i;
 	int r;
-	capacity=capacity+i;
 	char* s=new char [capacity];
 	for(r=0;r<nb_char;r++){
 		s[r]=data[r];
@@ -210,7 +205,7 @@ if(i<0){
 	for(r=nb_char;r<capacity;r++){
 		s[r]='\0';}
 	data=s;
-}}
+}
 
 //methods resize
 //change nb_char in lg
