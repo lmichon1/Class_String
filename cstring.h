@@ -60,17 +60,17 @@ class cstring
     // =======================================================================
     //                            Accessors: getters
     // =======================================================================
-    int length();
-    int getSizeMax(); //here's the max_size method
-    int getCapacity();
-    char getChar(int place);
-    char* getData();
+    inline int length();
+    inline int getSizeMax(); //here's the max_size method
+    inline int getCapacity();
+    inline char getChar(int place);
+    inline char* getData();
     // =======================================================================
     //                            Accessors: setters
     // =======================================================================
-    void setLength(int length);
-    void setData(char* databis);
-    void setChar(int place, char letter);
+    inline void setLength(int length);
+    inline void setData(char* databis);
+    inline void setChar(int place, char letter);
     // =======================================================================
     //                                Operators
     // =======================================================================
