@@ -148,11 +148,11 @@ int cstring::getSizeMax()
   return MAX_SIZE;
 }
 
-char* cstring::getChar(int place){
+char cstring::getChar(int place){
 return *(data+place);
 }
 
-char cstring::getData(){
+char* cstring::getData(){
 return data;
 };
 
