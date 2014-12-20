@@ -40,6 +40,7 @@ cstring::cstring(const char* databis)
 {
   nb_char=strlen(databis);
   capacity=nb_char;
+  limit();
   data=new char[nb_char];
   memcpy (data, databis, nb_char+1);
 
@@ -50,6 +51,7 @@ cstring::cstring(const cstring &strbis)
 {
   nb_char=strbis.nb_char;
   capacity=strbis.capacity;
+  limit();
   data=new char[capacity+1];
   memcpy (data,strbis.data, nb_char+ 1);
 }  
@@ -96,20 +98,22 @@ cstring & cstring::operator=(char* c){
 //+char///////////////////////////////
 cstring cstring::operator+(char ch)
 {
-  int temp_nb_char=nb_char+2;
-  char* temp_data=new char[temp_nb_char];//reserve memory of tempolary string
-  memcpy(temp_data,data,nb_char*sizeof(*data));
-  temp_data[temp_nb_char-2]=ch;
-  temp_data[temp_nb_char-1]='\0';
-
-  cstring* final_data=new cstring(temp_data);
-  return *final_data;
+  if(nb_char<MAX_SIZE-1){
+    int temp_nb_char=nb_char+2;
+    char* temp_data=new char[temp_nb_char];//reserve memory of tempolary string
+    memcpy(temp_data,data,nb_char*sizeof(*data));
+    temp_data[temp_nb_char-2]=ch;
+    temp_data[temp_nb_char-1]='\0';
+    cstring* final_data=new cstring(temp_data);
+    return *final_data;}
+  else{printf("Reached max size!\n");return *this;}
 }
 //+string///////////////////////////
 //since + is an unary operator, it concatenates 2 strings into the first
 cstring& cstring::operator+(const cstring &str){
 char *tot;
 capacity=capacity+str.capacity;
+limit();
 int i;
 for(i=0;i<nb_char;i++){
     tot[i]=data[i];
@@ -122,6 +126,7 @@ for(i=0;i<str.nb_char;i++){
 data[i+nb_char]=str.data[i];
 }
 nb_char=nb_char+str.nb_char;
+limit();
 return *this;
 }
 //return character in given position
@@ -137,26 +142,26 @@ return *(data+pos);
 //                            Public Methods
 // =================================================================
 //gettor////////////////////////
-int cstring::length()
+inline int cstring::length()
 {
   return nb_char;
 }
 
-int cstring::getCapacity()
+inline int cstring::getCapacity()
 { 
   return capacity;
 }
 
-int cstring::getSizeMax()
+inline int cstring::getSizeMax()
 {
   return MAX_SIZE;
 }
 
-char cstring::getChar(int place){
+inline char cstring::getChar(int place){
 return *(data+place);
 }
 
-char* cstring::getData(){
+inline char* cstring::getData(){
 return data;
 };
 
@@ -261,3 +266,11 @@ bool cstring::empty(void){
 return nb_char==0;
 }
 
+//decreases capacity and nb_char if they are higher than the maximum size
+void cstring::limit(void){
+if(capacity>MAX_SIZE)
+    capacity=MAX_SIZE;
+    if(nb_char>MAX_SIZE-1){//the last character must be '\0'
+        nb_char=MAX_SIZE-1;
+    }
+}
