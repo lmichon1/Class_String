@@ -105,20 +105,24 @@ cstring cstring::operator+(char ch)
   cstring* final_data=new cstring(temp_data);
   return *final_data;
 }
-//+string/////////////////////////////
+//+string///////////////////////////
+//since + is an unary operator, it concatenates 2 strings into the first
 cstring& cstring::operator+(const cstring &str){
-cstring *tot;
-tot->capacity=capacity+str.capacity;
-tot->data=new char[tot->capacity];
+char *tot;
+capacity=capacity+str.capacity;
 int i;
 for(i=0;i<nb_char;i++){
-    tot->data[i]=data[i];
+    tot[i]=data[i];
+}
+data=new char[capacity];
+for(i=0;i<nb_char;i++){
+    data[i]=tot[i];
 }
 for(i=0;i<str.nb_char;i++){
-tot->data[i+nb_char]=str.data[i];
+data[i+nb_char]=str.data[i];
 }
-tot->nb_char=nb_char+str.nb_char;
-return *tot;
+nb_char=nb_char+str.nb_char;
+return *this;
 }
 //return character in given position
 char& cstring::operator[](unsigned int pos){
